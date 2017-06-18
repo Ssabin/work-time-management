@@ -61,7 +61,7 @@ app.get('/users/', (req, res) => {
     const user = req.body;
     const serverUser = users.find(user => user.name);
     if(user.name === serverUser.name && user.password === serverUser.password) res.json(serverUser);
-    else res.json(404,{error: 'not found'})
+    else res.status(404).send('not found')
 })
 
 // // READ
@@ -79,22 +79,30 @@ app.get('/users/', (req, res) => {
 // })
 
 // Login
-app.post('/signin', (req, res) => {
+app.post('/login', (req, res) => {
     const user = req.body;
     const serverUser = users.find(thisUser => user.userName === thisUser.userName);
-    if(!serverUser) res.json(404,{error: 'User not found'})
+    if(!serverUser){
+        res.status(404).send('User not found')
+        return
+    }
     if(user.userName === serverUser.userName && user.password === serverUser.password){
         res.json(serverUser);
+        return
     } else {
-        res.json(404,{error: 'User not found'})
+        res.status(404).send('User not found')
+        return
     }
 })
 
 // Sign up
-app.post('/signup', (req, res) => {
+app.post('/register', (req, res) => {
     const user = req.body;
     const serverUser = users.find(thisUser => user.userName === thisUser.userName);
-    if(serverUser) res.json(404,{error: 'User already exist!'})
+    if(serverUser){
+        res.status(404,{error: 'User already exist!'})
+        return
+    }
     if(user.userName && user.password){
         users.push(user);
         res.json(user);

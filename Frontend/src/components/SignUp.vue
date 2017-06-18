@@ -1,5 +1,6 @@
 <template>
-    <div id="register">
+    <div id="signUp">
+        <h1>Register a new account!</h1>
         <form>
             <input type="text" v-model="user.name" placeholder="Username">
             <input type="password" v-model="user.pass" placeholder="Password">

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/pages/Home'
 import SignUp from '@/components/SignUp'
+import SignIn from '@/components/SignIn'
 // import ShiftForm from '@/components/ShiftForm'
 
 Vue.use(Router)
@@ -20,6 +21,11 @@ export default new Router({
       path: '/signUp',
       name: 'SignUp',
       component: SignUp
+    },
+    {
+      path: '/SignIn',
+      name: 'SignIn',
+      component: SignIn
     }
   ]
 })
