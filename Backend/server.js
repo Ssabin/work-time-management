@@ -14,6 +14,8 @@ app.get('/', (req, res) => {
 
 let workData = [];
 
+let users = [{userName: 'sab', password: '123'}]
+
 // *** REST API Events***
 
 // LIST
@@ -52,12 +54,15 @@ app.post('/workData', (req, res) => {
 //     res.json({ msg: 'event was updated!' });
 // });
 // /********************************************************************************************* */
-// // *** REST API Places***
+// // *** REST API Users***
 
-// // LIST
-// app.get('/place', (req, res) => {
-//     res.json(places);
-// })
+// LIST
+app.get('/users/', (req, res) => {
+    const user = req.body;
+    const serverUser = users.find(user => user.name);
+    if(user.name === serverUser.name && user.password === serverUser.password) res.json(serverUser);
+    else res.json(404,{error: 'not found'})
+})
 
 // // READ
 // app.get('/place/:id', (req, res) => {
@@ -73,14 +78,29 @@ app.post('/workData', (req, res) => {
 //     res.json({ msg: 'place was Deleted!' });
 // })
 
-// // CREATE
-// app.post('/place', (req, res) => {
-//     const item = req.body;
-//     item.id = guid();
-//     places.push(item);
-//     res.json({ msg: 'place was Created!' });
+// Login
+app.post('/signin', (req, res) => {
+    const user = req.body;
+    const serverUser = users.find(thisUser => user.userName === thisUser.userName);
+    if(!serverUser) res.json(404,{error: 'User not found'})
+    if(user.userName === serverUser.userName && user.password === serverUser.password){
+        res.json(serverUser);
+    } else {
+        res.json(404,{error: 'User not found'})
+    }
+})
 
-// })
+// Sign up
+app.post('/signup', (req, res) => {
+    const user = req.body;
+    const serverUser = users.find(thisUser => user.userName === thisUser.userName);
+    if(serverUser) res.json(404,{error: 'User already exist!'})
+    if(user.userName && user.password){
+        users.push(user);
+        res.json(user);
+    }
+})
+
 
 // //UPDATE
 // app.put('/place', (req, res) => {
