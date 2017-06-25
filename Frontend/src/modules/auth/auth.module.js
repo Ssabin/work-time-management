@@ -24,7 +24,18 @@ const actions = {
             .catch(err => {
                 console.log(err.body)
             })
+    },
+    register ({state, commit}, user) {
+        return Vue.http.post('register', user)
+            .then(res => res.json())
+            .then(user => {
+                commit(SAVE_LOGGED_IN_USER, user)
+            })
+            .catch(err => {
+                console.log(err.body)
+            })
     }
+
 }
 
 const getters = {

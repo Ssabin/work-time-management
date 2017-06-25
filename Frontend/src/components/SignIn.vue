@@ -1,17 +1,17 @@
 <template>
-    <div id="signUp">
-        <h1>Register a new account!</h1>
+    <div id="signIn">
+        <h1>Login your account</h1>
         <div class="form-conatainer">
             <input type="text" v-model="user.name" placeholder="Username">
             <input type="password" v-model="user.pass" placeholder="Password">
-            <button @click="signUp">Submit</button>
+            <button @click="SignIn">Submit</button>
         </div>
     </div>
 </template>
 
 <script>
     export default {
-        name: 'SignUp',
+        name: 'SignIn',
         data () {
             return {
                 user: {
@@ -21,9 +21,9 @@
             }
         },
         methods: {
-            signUp () {
+            SignIn () {
                 if (this.user.name === '' || this.user.pass === '') return
-                this.$store.dispatch('register', {userName: this.user.name, password: this.user.pass})
+                this.$store.dispatch('login', {userName: this.user.name, password: this.user.pass})
                     .then(_ => {
                         this.$router.push('/')
                     })
