@@ -1,6 +1,7 @@
 import Vue from 'vue'
 
 export const SAVE_LOGGED_IN_USER = 'auth/SAVE_LOGGED_IN_USER'
+export const LOG_OUT_USER = 'auth/LOG_OUT_USER'
 
 const state = {
     isLoggedIn: false,
@@ -11,6 +12,10 @@ const mutations = {
     [SAVE_LOGGED_IN_USER] (state, user) {
         state.userLoggedIn = user
         state.isLoggedIn = true
+    },
+    [LOG_OUT_USER] (state) {
+        state.userLoggedIn = {}
+        state.isLoggedIn = false
     }
 }
 
@@ -34,8 +39,17 @@ const actions = {
             .catch(err => {
                 console.log(err.body)
             })
+    },
+    logout ({state, commit}) {
+        return Vue.http.post('logout', state.userLoggedIn)
+            .then(res => res.json())
+            .then(user => {
+                commit(LOG_OUT_USER)
+            })
+            .catch(err => {
+                console.log(err.body)
+            })
     }
-
 }
 
 const getters = {
