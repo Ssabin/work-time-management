@@ -19,7 +19,7 @@ let users = [{userName: 'sab', password: '123'}]
 // *** REST API Events***
 
 // LIST
-app.get('/workData', (req, res) => {
+app.get('/work-data', (req, res) => {
     res.json(workData);
 })
 
@@ -38,7 +38,7 @@ app.get('/workData', (req, res) => {
 // })
 
 // CREATE
-app.post('/workData', (req, res) => {
+app.post('/work-data', (req, res) => {
     const item = req.body;
     console.log('item' , item)
     item.id = req.body.date;
