@@ -3,7 +3,6 @@
     <nav>
       <ul>
         <li>
-          {{isLoggedIn}}
           <router-link to="/">Home</router-link>
           <template v-if="!isLoggedIn">
             <router-link to="/signin">Sign in</router-link>

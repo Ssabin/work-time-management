@@ -14,7 +14,10 @@ app.get('/', (req, res) => {
 
 let workData = [];
 
+// fake DB
 let users = [{userName: 'sab', password: '123'}]
+
+let logedUsers = [];
 
 // *** REST API Events***
 
@@ -87,6 +90,7 @@ app.post('/login', (req, res) => {
         return
     }
     if(user.userName === serverUser.userName && user.password === serverUser.password){
+        logedUsers.push(serverUser);
         res.json(serverUser);
         return
     } else {
@@ -100,13 +104,21 @@ app.post('/register', (req, res) => {
     const user = req.body;
     const serverUser = users.find(thisUser => user.userName === thisUser.userName);
     if(serverUser){
-        res.status(404,{error: 'User already exist!'})
+        res.status(404).send('User already exist!')
         return
     }
     if(user.userName && user.password){
         users.push(user);
+        logedUsers.push(user);
         res.json(user);
     }
+})
+
+// Logout
+app.post('/logout', (req, res) => {
+    const user = req.body;
+    logedUsers = logedUsers.filter(thisUser => user.userName !== thisUser.userName);
+    res.json({message: 'loged out'});
 })
 
 
