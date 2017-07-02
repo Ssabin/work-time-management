@@ -1,13 +1,13 @@
 <template>
   <div id="shiftForm" class="shift-form__container">
-        <input type="date" v-model="dateTimeInput" />
-        <input type="text" v-model="startTimeInput" />
-        {{startTime}}
-        <input type="text" v-model="endTimeInput" />
-        {{endTime}}
-        <input type="submit" value="Submit shift data" @click="submitShiftData">
-        {{storeMsg}}
-        <input type="submit" value="Loaf shift data" @click="loadData">
+      <input type="date" v-model="dateTimeInput" />
+      <input type="text" v-model="startTimeInput" />
+      {{startTime}}
+      <input type="text" v-model="endTimeInput" />
+      {{endTime}}
+      <input type="submit" value="Submit shift data" @click="submitShiftData">
+      {{storeMsg}}
+      <input type="submit" value="Loaf shift data" @click="loadData">
     </div>
 </template>
 
